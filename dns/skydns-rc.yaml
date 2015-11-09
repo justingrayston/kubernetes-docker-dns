@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: etcd
-        image: gcr.io/google_containers/etcd:2.0.9
+        image: gcr.io/google_containers/etcd:2.2.1 
         resources:
           limits:
             cpu: 100m
@@ -32,9 +32,9 @@ spec:
         - -data-dir
         - /var/etcd/data
         - -listen-client-urls
-        - http://127.0.0.1:2379,http://127.0.0.1:4001 # <- won't these conflict with the k8s etcd?
+        - http://127.0.0.1:2378,http://127.0.0.1:4001 # <- won't these conflict with the k8s etcd?
         - -advertise-client-urls
-        - http://127.0.0.1:2379,http://127.0.0.1:4001
+        - http://127.0.0.1:2378,http://127.0.0.1:4001
         - -initial-cluster-token
         - skydns-etcd
         volumeMounts:
@@ -44,16 +44,21 @@ spec:
         # image: gcr.io/google_containers/kube2sky:1.11 <- this is the original image results in
         # Failed to list *api.Endpoints: couldn't get version/kind; json parse error: invalid character '<' looking for beginning of value
         # Built my own image from master and it 'seems' to be happy, as it connects to the api ok
-        image: justingrayston/kube2sky
+        #image: justingrayston/kube2sky:1.11
+        #image: kubernetes/kube2sky
+        image: gcr.io/google_containers/kube2sky:1.11
         resources:
           limits:
             cpu: 100m
             memory: 50Mi
         args:
         # command = "/kube2sky"
-        - -domain=cluster.domain
+        #- -kube_master_url=https://10.0.0.1:443
+        - -domain=cluster.local
+        #- -etcd-server=http://127.0.0.1:4002
+        - -kube_master_url=https://10.0.0.1/api/
       - name: skydns
-        image: gcr.io/google_containers/skydns:2015-10-13-8c72f8c
+        image: skynetservices/skydns
         resources:
           limits:
             cpu: 100m
@@ -63,7 +68,7 @@ spec:
         - -machines=http://127.0.0.1:4001
         - -addr=0.0.0.0:53
         - -ns-rotate=false
-        - -domain=cluster.domain. # <- should this have a trailing dot?
+        - -domain=cluster.local # <- should this have a trailing dot?
         ports:
         - containerPort: 53
           name: dns
@@ -92,7 +97,7 @@ spec:
             cpu: 10m
             memory: 20Mi
         args:
-        - -cmd=nslookup kubernetes.default.svc.cluster.domain localhost >/dev/null
+        - -cmd=nslookup kubernetes.default.svc.cluster.local localhost >/dev/null
         - -port=8080
         ports:
         - containerPort: 8080
