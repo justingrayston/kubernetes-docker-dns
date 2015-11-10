@@ -20,9 +20,15 @@ $ brew install kubernetes-cli
 
 You should now be ready to run a few scripts to get the cluster up and running.
 
+### Update config and set up
+
+First, update the values in config.sh if you need to.
+
+Then run setup_dns.sh, which will generate your replication controller and service yamls for DNS from the yaml templates.
+
 ### Start the cluster
 
-First start the cluster itself, so in the project directory do the following:
+Now start the cluster itself, so in the project directory do the following:
 
 ```bash
 $ ./start_cluster.sh
