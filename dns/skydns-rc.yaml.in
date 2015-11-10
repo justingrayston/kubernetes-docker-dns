@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: etcd
-        image: gcr.io/google_containers/etcd:2.0.9
+        image: gcr.io/google_containers/etcd:2.2.1
         resources:
           limits:
             cpu: 100m
@@ -48,6 +48,7 @@ spec:
         args:
         # command = "/kube2sky"
         - -domain={{ pillar['dns_domain'] }}
+        - -kube_master_url={{ kube_server_url }}
       - name: skydns
         image: gcr.io/google_containers/skydns:2015-10-13-8c72f8c
         resources:
@@ -59,7 +60,7 @@ spec:
         - -machines=http://127.0.0.1:4001
         - -addr=0.0.0.0:53
         - -ns-rotate=false
-        - -domain={{ pillar['dns_domain'] }}.
+        - -domain={{ pillar['dns_domain'] }}
         ports:
         - containerPort: 53
           name: dns
