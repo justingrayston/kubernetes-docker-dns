@@ -70,18 +70,6 @@ this will be an arg at some point.
 started by the scripts, so if you have other images you may not want to use this.)
 
 
-## Current Issues and problems.
-
-Currently DNS is not working and it is in the process of being debugged. Here is a run down of things found, and possible issues.
-
-* The Google kube2sky image (gcr.io/google_containers/kube2sky:1.11) was failing
-to communicate with the api. Returning 
-```Failed to list *api.Endpoints: couldn't get version/kind; 
-json parse error: invalid character '<' looking for beginning of value```. Building the image from kubernetes master removes this error, and I can only assume is now working ok. It reports connection to etcd and API.
-* When replacing {{ pillar['dns_domain']}} in the YAML template there is trailing
-dot, this looks odd to me, but I can only imagine it must be correct for it to
-work in production?
-* The docker.md instructions start an etcd image, on 127.0.0.1:4001, the rc for the dns also start an etcd image on the same ports, could these be conflicting?
 
 
 
