@@ -18,8 +18,8 @@ docker run \
     --privileged=true \
     -d \
     justingrayston/hyperkube:v1.1.1-beta.1 \
-    /hyperkube kubelet --containerized --hostname-override="127.0.0.1" --address="0.0.0.0" --api-servers=http://localhost:8080 --config=/etc/kubernetes/manifests \
-    --cluster-dns=10.0.0.10 --cluster-domain=cluster.local
+    /hyperkube kubelet --api-servers=http://localhost:8080 --v=2 --address=0.0.0.0 --enable-server --hostname-override=127.0.0.1 --config=/etc/kubernetes/manifests-multi --cluster-dns=10.0.0.10 --cluster-domain=cluster.local
+
 
 # Run the service proxy
 

@@ -53,10 +53,8 @@ spec:
             memory: 50Mi
         args:
         # command = "/kube2sky"
-        #- -kube_master_url=https://10.0.0.1:443
         - -domain=cluster.local
-        #- -etcd-server=http://127.0.0.1:4002
-        - -kube_master_url=https://10.0.0.1/api/
+        - -kube_master_url=http://192.168.99.100:8080 #<- your docker machine IP
       - name: skydns
         image: skynetservices/skydns
         resources:
