@@ -21,10 +21,10 @@ docker run \
     --pid=host \
     --privileged=true \
     -d \
-    justingrayston/hyperkube:$KUBE_VERSION \
+    gcr.io/google_containers/hyperkube:$KUBE_VERSION \
     /hyperkube kubelet --api-servers=http://localhost:8080 --v=2 --address=0.0.0.0 --enable-server --hostname-override=127.0.0.1 --config=/etc/kubernetes/manifests-multi --cluster-dns=$DNS_SERVER_IP --cluster-domain=$DNS_DOMAIN
 
 
 # Run the service proxy
 
-docker run -d --net=host --privileged justingrayston/hyperkube:$KUBE_VERSION /hyperkube proxy --master=http://127.0.0.1:8080 --v=2
+docker run -d --net=host --privileged gcr.io/google_containers/hyperkube:$KUBE_VERSION /hyperkube proxy --master=http://127.0.0.1:8080 --v=2
