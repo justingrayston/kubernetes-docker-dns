@@ -8,5 +8,5 @@
 
 machine=default
 
-ssh -i ~/.docker/machine/machines/$machine/id_rsa docker@$(docker-machine ip $machine) \
+ssh -f -T -N -i ~/.docker/machine/machines/$machine/id_rsa docker@$(docker-machine ip $machine) \
 	-L 8080:localhost:8080
