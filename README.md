@@ -22,9 +22,13 @@ You should now be ready to run a few scripts to get the cluster up and running.
 
 ### Update config and set up
 
-First, update the values in config.sh if you need to.
+First, update the values in config.sh if you need to. Please note that KUBE_SERVER
+refers to the location of your K8s master, this serves as your API endpoint. This
+will usually be your host IP. On Mac OSX, this will be the docker machine host
+IP. Also if you are running this with a firewall on your network, make sure traffic
+can actually reach the KUBE_SERVER.
 
-Then run setup_dns.sh, which will generate your replication controller and service yamls for DNS from the yaml templates.
+Then run ```setup_dns.sh```, which will generate your replication controller and service yamls for DNS from the yaml templates.
 
 ### Start the cluster
 
