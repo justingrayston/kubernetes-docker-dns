@@ -3,7 +3,16 @@ Run a single kubernetes cluster, with DNS using docker for local development.
 The aim is to have an easy and consistant way of developing apps in the 
 same environment they will be deployed into.
 
-Currently using Mac OSX.
+Currently using Mac OSX. Updated to Kubernetes 1.2 and the latest containerised
+hypekube.
+
+I am currently keeping an eye on [spread](https://github.com/redspread/spread)
+
+It seems like it has a few good concepts and approaches to simplify things.
+However I have tried it on a couple of projects, and have found it a bit
+inconsistent between machines, occasional network issues (for some reason,
+outbound to internet). So currently I am sticking with this as it just works.
+I will look to create a single start command script as time allows.
 
 ## Set up and run
 

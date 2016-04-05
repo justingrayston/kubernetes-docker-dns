@@ -1,5 +1,5 @@
 #!/bin/bash
-
+kubectl create namespace kube-system
 kubectl create -f dns/skydns-rc.yaml
 kubectl create -f dns/skydns-svc.yaml
 
